@@ -6,6 +6,7 @@
  * and starts the calculator application.
  */
 
+//rosa@LaptopRosaGM:~/AAA-ENSO/ENSO-calculadora-1.6$ mvn exec:java -Dexec.mainClass="calculator.CalculatorApp"
 package calculator;
 
 public class CalculatorApp {

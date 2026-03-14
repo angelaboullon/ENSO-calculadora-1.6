@@ -44,4 +44,10 @@ public interface View {
      * @param listener The action listener
      */
     void setActionListener(EventHandler listener);
+
+    //// Implementación SC-010: Botón de retroceso por Rosa
+
+
+
+
 }
