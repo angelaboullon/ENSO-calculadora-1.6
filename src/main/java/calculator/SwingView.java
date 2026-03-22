@@ -40,7 +40,7 @@ public class SwingView implements View {
     private final JButton butAdd, butMinus, butMultiply, butDivide,
             butEqual, butCancel, butSqrt, butSquare, butInv, butCos, 
             butSin, butTan, butPower, butLog, butPercent, butAbs, butBin, 
-            butln, butNegate, butDecimal;
+            butln, butNegate, butDecimal, butBackspace;
 
     private EventHandler eventHandler;
 
@@ -109,6 +109,7 @@ public class SwingView implements View {
         butAbs = createButton("abs", ButtonType.FUNCTION);
         butBin = createButton("bin", ButtonType.FUNCTION);
         butNegate = createButton("+/-", ButtonType.NUMBER);
+        butBackspace = createButton("<-", ButtonType.FUNCTION);
         butDecimal = createButton(",", ButtonType.NUMBER);
 
         setupLayout();
@@ -155,6 +156,7 @@ public class SwingView implements View {
         subPanels[3].add(butNums[9]);
         subPanels[3].add(Box.createHorizontalStrut(15));
         subPanels[3].add(butEqual);
+        subPanels[3].add(butBackspace); // Nuevo botón de eliminar
         subPanels[3].add(butCancel);
         mainPanel.add(subPanels[3]);
 
@@ -193,7 +195,7 @@ public class SwingView implements View {
     }
 
     public void init() {
-        frame.setSize(465, 460);
+        frame.setSize(550, 460); //Redimensión de la ventana
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -235,6 +237,7 @@ public class SwingView implements View {
         butDecimal.addActionListener(e -> eventHandler.onDecimalPressed());
         butEqual.addActionListener(e -> eventHandler.onEqualsPressed());
         butCancel.addActionListener(e -> eventHandler.onClearPressed());
+        butBackspace.addActionListener(e -> eventHandler.onBackspacePressed());
     }
 
     @Override

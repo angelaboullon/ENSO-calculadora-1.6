@@ -134,4 +134,23 @@ public class Controller implements EventHandler {
             return formatted.replaceAll("0*$", "").replaceAll("\\.$", "");
         }
     }
+
+
+    @Override
+    public void onBackspacePressed() {
+        // Se estamos mostrando un resultado final, o botón de retroceso non debe facer nada
+        if (resetingInput) {
+            return;
+        }
+
+        // O código que xa tiñas antes...
+        if (displayBuffer.length() > 0) {
+            displayBuffer.deleteCharAt(displayBuffer.length() - 1);
+            if (displayBuffer.length() == 0) {
+                view.clearDisplay();
+            } else {
+                view.setDisplay(displayBuffer.toString());
+            }
+        }
+    }
 }
