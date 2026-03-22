@@ -1,0 +1,391 @@
+name: "Solicitude de Cambio"
+description: "Propoñer cambio no proxecto de calculadora."
+title: "[SC-XXX] - <Escribe un título descritivo>"
+labels: ["solicitude", "triage"]
+
+body:
+  # 1. Rexistro da solicitude.
+  - type: markdown
+    attributes:
+      value: "# REXISTRO DA SOLICITUDE"
+
+  # DATOS DO SOLICITANTE.
+  - type: markdown
+    attributes:
+      value:  "### 1. Datos do solicitante"
+
+  - type: input # Campo de texto normal: nome completo.
+    id: nome_completo_solicitante
+    attributes: 
+      label: Nome completo
+      placeholder: Ex. Juan Pérez Rodríguez
+
+  - type: markdown  # Campo non modificable: rol.
+    attributes: 
+      value:  "Rol: Analista"
+  
+  - type: input # Campo de texto normal: correo electrónico.
+    id: correo_electronico_solicitante
+    attributes: 
+      label: Correo electrónico
+      placeholder: Ex. juanprodriguez@gmail.com
+
+  - type: input # Campo de texto normal: teléfono de contacto.
+    id: telefono_solicitante
+    attributes: 
+      label: Teléfono de contacto
+      placeholder: Ex. 616991105
+
+  # DESCRICIÓN E XUSTIFICACIÓN DO CAMBIO.
+  - type: markdown
+    attributes:
+      value:  "### 2. Descrición e Xustificacion do cambio"
+  
+  - type: textarea  # Descrición do cambio proposto.
+    id: descricion_detallada_cambio
+    attributes:
+      label: Descrición detallada do cambio proposto
+      description: "Describe de forma clara e detallada o cambio que se pretende implementar. Indica que funcionalidades, procesos, regras ou características do sistema se engaden, modifican ou melloran."
+      placeholder: "Ex. O sistema deberá ser fácil de entender, garantindo que os usuarios comprenden a finalidade de cada opción, mensaxe e fluxo sen necesidade de formación externa. Necesitarase presentar unha interface clara e coherente, ademais de evitar ambigüidades."
+  
+  - type: textarea  # Alcance do cambio.
+    id: alcance_cambio
+    attributes:
+      label: Alcance do cambio
+      description: "Indica que sistemas, módulos, procesos ou departamentos se verán afectados polo cambio e, se procede, que elementos quedan fóra do seu alcance."
+      placeholder: "Ex. O cambio aplicarase á interface de usuario do sistema, incluíndo os formularios de rexistro e edición de datos, os menús de navegación, as mensaxes informativas e de erro, así como os fluxos principais de operación. Non inclúe cambios na lóxica do sistema nin nos algoritmos de procesamento de datos."
+
+
+  - type: dropdown
+    id: tipo_cambio
+    attributes:
+      label: Tipo do cambio
+      description: Indica a categoría principal da solicitude de cambio.
+      options:
+        - Corrección de erro (hai un erro ou fallo)
+        - Mellora / Optimización (algo xa existe pero pode mellorar)
+        - Nova funcionalidade (algo que non existía)
+        - Adaptación a novas necesidades do negocio (cambios en procesos internos)
+        - Cumprimento normativo ou legal (leis, auditorías, RGPD, etc.)
+        - Seguridade / Xestión de riscos (riscos, vulnerabilidades)
+        - Outro
+      
+  - type: input
+    id: tipo_cambio_outro
+    attributes:
+      label: Especifica outro tipo de cambio
+      description: "Se seleccionaches 'Outro', describe aquí a categoría do cambio."
+
+  - type: textarea  # Xustificación do cambio proposto.
+    id: xustificacion_cambio 
+    attributes:
+      label: Motivación e obxectivo do cambio
+      description: "Responde que se pretende conseguir co cambio e por que é necesaria a súa aplicación."
+      placeholder: "Ex. Mellorar a usabilidade do sistema para que os usuarios poidan comprender facilmente as opcións dispoñibles e completar os fluxos de traballo sen necesidade de formación adicional. Isto permitirá reducir erros de uso e aumentar a eficiencia na realización das tarefas."
+    
+
+  - type: dropdown  # Importancia do cambio proposto.
+    id: importancia_cambio
+    attributes:
+      label: Importancia do cambio
+      description: Indica a importancia do cambio
+      options:
+        - "Baixa (cambio que pode programarse a longo prazo)"
+        - "Media (cambio relevante, pero non crítico para operacións)"
+        - "Alta (cambio importante que afecta procesos clave ou múltiples usuarios)"
+        - "Crítica (cambio urxente, debe implementarse canto antes)"
+   
+ 
+
+
+
+# 2. Avaliación da solicitude.
+  - type: markdown
+    attributes:
+      value: "# 2. AVALIACIÓN DA SOLICITUDE"   
+  
+  - type: markdown
+    attributes:
+      value: "## Análise de viabilidade técnica" 
+  # DESCRICIÓN TÉCNICA DA SOLUCIÓN
+  - type: textarea
+    id: descricion_tecnica
+    attributes: 
+      label: Descrición técnica da solución
+      description: "Arquitectura/Modificación prevista, tecnoloxías implicadas, cambios en procesos ou sistemas"
+      placeholder: "Ex.\n- Nova arquitectura cliente-servidor\n- Actualización da base de datos a PostgreSQL 15\n "
+    
+  - type: textarea
+    id: analise_compatibilidade
+    attributes: 
+      label: Análise de compatibilidade 
+      description: "Impacto sobre sistemas existentes, dependencias técnicas, necesidade de actualizacións."
+      placeholder: "Ex.\n- Sistema ERP compatible coa nova versión\n- Necesidade de actualizar drivers ou librerías\n"
+    
+  - type: dropdown  # Complexidade
+    id: complexidade_tecnica
+    attributes:
+      label: Complexidade técnica
+      description: Indica a complexidade técnica do cambio
+      options:
+        - "Baixa"
+        - "Media"
+        - "Alta"
+        - "Moi alta"
+    
+
+  ## CUSTOS E RECURSOS
+  - type: markdown
+    attributes:
+      value: "## Análise de custos e recursos" 
+  # RECURSOS HUMANOS NECESARIOS.
+  - type: markdown
+    attributes:
+      value:  "### 1. Recursos Humanos necesarios"
+  - type: textarea
+    id: perfis_implicados
+    attributes: 
+      label: Perfís implicados
+      description: Indica os roles ou perfís dos empregados que se verán afectados polo cambio ou que deberán participar na súa implementación
+      placeholder: "Ex.\n- 2 Analistas de datos"
+    
+  # RECURSOS TÉCNICOS
+  - type: markdown
+    attributes:
+      value:  "### 2. Recursos Técnicos"
+  - type: textarea
+    id: recursos_tecnicos_necesarios
+    attributes: 
+      label: Recursos técnicos necesarios
+      description: "Indica os recursos técnicos necesarios para implementar o cambio, como infraestrutura, ferramentas, licenzas ou sistemas implicados"
+      placeholder: "Ex.\n- Servidor de base de datos adicional\n -Licenza do ERP XYZ"
+       
+  # ESTIMACIÓN ECONÓMICA
+  - type: markdown
+    attributes:
+      value:  "### 3. Estimación económica"
+  - type: input # Campo de texto normal: estimación económica
+    id: custo_total_estimado
+    attributes: 
+      label: Custo total estimado
+      placeholder: Ex. 2500 euros
+   
+# IMPACTO EN PRAZOS
+  - type: markdown
+    attributes:
+      value:  "### 4. Impacto en prazos"
+  - type: input # Campo de texto normal: duración estimada
+    id: duracion_estimada
+    attributes: 
+      label: Duración estimada
+      placeholder: Ex. 15 días
+   
+  - type: dropdown
+    id: confirmacion_duracion
+    attributes:
+      label: "Afecta á planificación actual?"
+      options:
+        - "Si"
+        - "Non"
+    
+  ## ANÁLISE DE RISCOS
+  - type: markdown
+    attributes:
+      value: "## Análise de riscos" 
+  - type: textarea  # Riscos asociados.
+    id: riscos_asociados
+    attributes:
+      label: Riscos identificados
+      description: "Describe os riscos asociados ao cambio. Indica cal é o risco, a súa probabilidade, impacto e medidas preventivas"
+      placeholder: "\nRISC XXX\nNome: \nDescrición: \nProbabilidade: \nImpacto: \nNivel de risco: \nMedidas preventivas: \n"
+   
+
+
+# 3. Planificación do cambio.
+  - type: markdown
+    attributes:
+      value: "# 3. PLANIFICACIÓN DO CAMBIO" 
+
+  # RESUMO DA PLANIFICACIÓN
+  - type: markdown
+    attributes:
+      value: "### 1. Resumo da planificación" 
+  - type: input # Campo de texto normal: data de inicio.
+    id: data_inicio
+    attributes: 
+      label: Data de inicio estimada
+      placeholder: "2025-02-27"
+  
+  - type: input # Campo de texto normal: data de fin.
+    id: data_fin
+    attributes: 
+      label: Data de fin estimada
+      placeholder: "2025-02-28"
+    
+  - type: input # Campo de texto normal: custo estimado.
+    id: custo_estimado
+    attributes: 
+      label: Custo estimado
+      placeholder: 2500 euros
+ 
+  - type: input # Campo de texto normal: horas de traballo
+    id: horas_traballo
+    attributes: 
+      label: Horas de traballo estimadas
+      placeholder: 15 horas
+   
+
+  # OBXECTIVOS DA PLANIFICACIÓN
+  - type: markdown
+    attributes:
+      value: "### 2. Obxectivos da planificación" 
+  - type: textarea
+    attributes:
+      label: Resultados esperados
+      description: "Describe os resultados que se esperan obter tras a planificación e implementación do cambio."
+      placeholder: "Ex.\n- Todas as tarefas pendentes reasignadas correctamente\n- Notificacións automáticas enviadas aos responsables\n- Disminución de incidencias operativas"
+  
+
+  # DESCOMPOSICIÓN EN TAREFAS
+  - type: markdown
+    attributes:
+      value: "### 3. Descomposición en tarefas"    
+  - type: textarea  
+    id: descomposicion_planificacion
+    attributes:
+      label: Descomposición en tarefas
+      description: "Lista as tarefas concretas necesarias para implementar o cambio."
+      placeholder: "Ex.\n- Tarefa 1: Reasignación automática de rutas (Responsable: Xestor de rutas)\n- Tarefa 2: Actualización do módulo de xestión de empregados (Responsable: Técnico de sistemas)"
+     
+
+
+# 4. Implementación do cambio.
+  - type: markdown
+    attributes:
+      value: "# 4. IMPLEMENTACIÓN DO CAMBIO" 
+
+    # DESCRICIÓN DA IMPLEMENTACIÓN 
+  - type: markdown
+    attributes:
+      value: "### 1. Descrición da implementación" 
+  - type: textarea  
+    id: descomposicion_implementacion
+    attributes:
+      label: Accións, medidas e dificultades
+      description: "Indica as accións que se realizarán para implementar o cambio, as medidas adoptadas e calquera dificultade prevista"
+      placeholder: "Ex.\n- Tarefa 1: Reasignación automática de rutas\n  Medidas: Configuración do módulo de xestión de empregados\n  Dificultades: Posibles conflitos con tarefas pendentes\n  Responsable: Técnico de sistemas\n"
+     
+      
+  - type: markdown
+    attributes:
+      value: "### 2. Datas reais e seguimento" 
+
+  - type: input # Campo de texto normal: data de inicio.
+    id: data_real_inicio
+    attributes: 
+      label: Data real de inicio 
+      placeholder: "2025-02-27"
+     
+
+  - type: input # Campo de texto normal: data de inicio.
+    id: data_real_fin
+    attributes: 
+      label: Data real de fin 
+      placeholder: "2025-03-01"
+   
+
+  - type: input # Campo de texto normal: data de inicio.
+    id: horas_empregadas
+    attributes: 
+      label: Horas realmente empregadas 
+      placeholder: 25 h
+   
+
+  - type: textarea  
+    id: recursos_empregados_efectivamente
+    attributes:
+      label: Recursos empregados efectivamente
+      description: "Enumera o conxunto de recursos empregados durante a implementación"
+      placeholder: " Recurso 1 \n Recurso 2 \n Recurso 3 \n ..."
+ 
+
+  - type: input # Campo de texto normal: data de inicio.
+    id: custo
+    attributes: 
+      label: Custo 
+      placeholder: 1200 €
+   
+
+# 5. Revisión da implementación.
+  - type: markdown
+    attributes:
+      value: "# 5. REVISIÓN DA IMPLEMENTACIÓN"
+
+  # DATOS DAS PROBAS
+  - type: markdown
+    attributes:
+      value: "### 1. Datos das probas" 
+
+  - type: textarea  
+    id: probas_realizadas
+    attributes:
+      label: Probas realizadas
+      description: "Describe as probas realizadas para verificar a implementación."
+      placeholder: "Ex.\n- Tarefa 1: Proba de carga do módulo de xestión de rutas\n"
+    
+
+  # ERROS E DESVIACIONS
+  - type: markdown
+    attributes:
+      value: "### 2. Erros e Desviacións" 
+
+  - type: textarea  # Erros identificados
+    id: erros
+    attributes:
+      label: Erros identificados
+      description: "Describe os erros ou desviacións atopadas durante a implementación. Indica cal é o erro, unha descrición, o grao de impacto, a decisión e o estado."
+      placeholder: "Ex.\n- Tarefa: Reasignación de rutas\n  Erro: As rutas non se reasignaron correctamente\n  Grao de impacto: Medio\n  Decisión: Acción correctiva\n  Estado: Completado"
+    
+
+  # CONCLUSIÓN DA REVISIÓN
+  - type: markdown
+    attributes:
+      value:  "### 3. Conclusión da Revisión" 
+  - type: checkboxes
+    id: aceptar_validacion
+    attributes:
+      label: Validación final
+      options:
+        - label: "A tarefa pode considerarse validada"
+  
+  - type: textarea  # Observaciones asociados.
+    id: observacions_finais
+    attributes:
+      label: Observacións finais
+      description: "Este campo permite incluír calquera comentario adicional relevante que non quedase reflectido nos apartados anteriores."
+      placeholder: "Describa detalladamente os comentarios finais"
+   
+  
+# 6. Peche da solicitude.
+  - type: markdown
+    attributes:
+      value: "# 6. PECHE DA SOLICITUDE"            
+
+  - type: checkboxes
+    id: peche_cambio
+    attributes:
+      label: Resultado final do cambio
+      options:
+        - label: "A modificación foi implementada conforme á planificación aprobada"
+        - label: "Os erros relevantes detectados na revisión foron resoltos"
+        - label: "A execución cumpre cos requisitos definidos"
+        - label: "O problema ou necesidade inicial queda resolto"
+        - label: "Interesados notificados do peche da solicitude"
+
+
+
+
+
+
+
+

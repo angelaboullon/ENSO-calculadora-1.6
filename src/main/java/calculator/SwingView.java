@@ -109,8 +109,7 @@ public class SwingView implements View {
         butAbs = createButton("abs", ButtonType.FUNCTION);
         butBin = createButton("bin", ButtonType.FUNCTION);
         butNegate = createButton("+/-", ButtonType.NUMBER);
-        butDecimal = createButton(".", ButtonType.NUMBER);
-        butBackspace = createButton("<-", ButtonType.FUNCTION);
+        butDecimal = createButton(",", ButtonType.NUMBER);
 
         setupLayout();
     }
@@ -269,9 +268,11 @@ public class SwingView implements View {
         }
 
         // Eliminar punto final sen díxitos
-        if (textValue.endsWith(".")) {
+        if (textValue.endsWith(",")) {
             textValue = textValue.substring(0, textValue.length() - 1);
         }
+
+        textValue = textValue.replace(',', '.');  //Convertir coma en punto antes de parsear a double.
 
         try {
             return Double.parseDouble(textValue);
@@ -299,6 +300,7 @@ public class SwingView implements View {
 
     @Override
     public void setDisplay(String displayText) {
+        displayText = displayText.replace('.',','); // Cambiar punto por coma en el display.
         text.setText(displayText);
         startNewInput = true;
     }
