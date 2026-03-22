@@ -25,6 +25,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 import static calculator.domain.BinaryOperatorModes.*;
 import static calculator.domain.UnaryOperatorModes.*;
@@ -112,6 +117,7 @@ public class SwingView implements View {
         butDecimal = createButton(",", ButtonType.NUMBER);
 
         setupLayout();
+        setupKeyBindings();
     }
 
     private JButton createButton(String label, ButtonType type) {
@@ -301,6 +307,103 @@ public class SwingView implements View {
         displayText = displayText.replace('.',','); // Cambiar punto por coma en el display.
         text.setText(displayText);
         startNewInput = true;
+    }
+
+    private void setupKeyBindings() {
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_0, 0), "0");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD0, 0), "0");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_1, 0), "1");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD1, 0), "1");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_2, 0), "2");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD2, 0), "2");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_3, 0), "3");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD3, 0), "3");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_4, 0), "4");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD4, 0), "4");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_5, 0), "5");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD5, 0), "5");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_6, 0), "6");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD6, 0), "6");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_7, 0), "7");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD7, 0), "7");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_8, 0), "8");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD8, 0), "8");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_9, 0), "9");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD9, 0), "9");
+
+        for (int i = 0; i <= 9; i++) {
+            final int number = i;
+            mainPanel.getActionMap().put(String.valueOf(i), new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (eventHandler != null) eventHandler.onNumberPressed(number);
+                }
+            });
+        }
+
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, 0), "add");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, 0), "add");
+        mainPanel.getActionMap().put("add", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (eventHandler != null) eventHandler.onBinaryOperatorPressed(ADD);
+            }
+        });
+
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, 0), "minus");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, 0), "minus");
+        mainPanel.getActionMap().put("minus", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (eventHandler != null) eventHandler.onBinaryOperatorPressed(MINUS);
+            }
+        });
+
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ASTERISK, 0), "multiply");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_MULTIPLY, 0), "multiply");
+        mainPanel.getActionMap().put("multiply", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (eventHandler != null) eventHandler.onBinaryOperatorPressed(MULTIPLY);
+            }
+        });
+
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0), "divide");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DIVIDE, 0), "divide");
+        mainPanel.getActionMap().put("divide", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (eventHandler != null) eventHandler.onBinaryOperatorPressed(DIVIDE);
+            }
+        });
+
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "equal");
+        mainPanel.getActionMap().put("equal", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (eventHandler != null) eventHandler.onEqualsPressed();
+            }
+        });
+
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "clear");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_C, 0), "clear");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0), "clear");
+        mainPanel.getActionMap().put("clear", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (eventHandler != null) eventHandler.onClearPressed();
+            }
+        });
+
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_PERIOD, 0), "decimal");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_COMMA, 0), "decimal");
+        mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DECIMAL, 0), "decimal");
+        mainPanel.getActionMap().put("decimal", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (eventHandler != null) eventHandler.onDecimalPressed();
+            }
+        });
     }
 
     private ImageIcon loadIcon() throws IOException {
