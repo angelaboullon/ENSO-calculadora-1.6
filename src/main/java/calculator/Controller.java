@@ -134,4 +134,21 @@ public class Controller implements EventHandler {
             return formatted.replaceAll("0*$", "").replaceAll("\\.$", "");
         }
     }
+
+
+        @Override
+        public void onBackspacePressed() {
+            // MITIGACIÓN DE RISCO: Só borramos se o buffer ten contido
+            if (displayBuffer.length() > 0) {
+                displayBuffer.deleteCharAt(displayBuffer.length() - 1);
+                
+                // Se despois de borrar queda baleiro, limpamos a vista
+                if (displayBuffer.length() == 0) {
+                    view.clearDisplay();
+                } else {
+                    view.setDisplay(displayBuffer.toString());
+                }
+            } 
+            // Se a lonxitude é 0, o "if" evita que faga nada, protexendo o programa.
+        }
 }
