@@ -109,6 +109,7 @@ public class SwingView implements View {
         butAbs = createButton("abs", ButtonType.FUNCTION);
         butBin = createButton("bin", ButtonType.FUNCTION);
         butNegate = createButton("+/-", ButtonType.NUMBER);
+        butBackspace = createButton("<-", ButtonType.FUNCTION);
         butDecimal = createButton(",", ButtonType.NUMBER);
 
         setupLayout();
