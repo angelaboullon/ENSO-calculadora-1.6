@@ -136,19 +136,21 @@ public class Controller implements EventHandler {
     }
 
 
-        @Override
-        public void onBackspacePressed() {
-            // MITIGACIÓN DE RISCO: Só borramos se o buffer ten contido
-            if (displayBuffer.length() > 0) {
-                displayBuffer.deleteCharAt(displayBuffer.length() - 1);
-                
-                // Se despois de borrar queda baleiro, limpamos a vista
-                if (displayBuffer.length() == 0) {
-                    view.clearDisplay();
-                } else {
-                    view.setDisplay(displayBuffer.toString());
-                }
-            } 
-            // Se a lonxitude é 0, o "if" evita que faga nada, protexendo o programa.
+    @Override
+    public void onBackspacePressed() {
+        // Se estamos mostrando un resultado final, o botón de retroceso non debe facer nada
+        if (resetingInput) {
+            return;
         }
+
+        // O código que xa tiñas antes...
+        if (displayBuffer.length() > 0) {
+            displayBuffer.deleteCharAt(displayBuffer.length() - 1);
+            if (displayBuffer.length() == 0) {
+                view.clearDisplay();
+            } else {
+                view.setDisplay(displayBuffer.toString());
+            }
+        }
+    }
 }
