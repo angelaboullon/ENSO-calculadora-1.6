@@ -53,12 +53,12 @@ public class Controller implements EventHandler {
         }
        
         // Prevent multiple decimal points in the current number
-        if (!displayBuffer.toString().contains(".")) {
+        if (!displayBuffer.toString().contains(",")) {
             // Handle leading decimal point by prepending a "0"
             if (displayBuffer.length() == 0) {
                 displayBuffer.append("0");
             }
-            displayBuffer.append(".");
+            displayBuffer.append(",");  //Cambiar punto por coma cuando se presiona el botón
             view.setDisplay(displayBuffer.toString());
         }
     }
@@ -132,6 +132,25 @@ public class Controller implements EventHandler {
         else {
             String formatted = String.format(java.util.Locale.US, "%.10f", result);
             return formatted.replaceAll("0*$", "").replaceAll("\\.$", "");
+        }
+    }
+
+
+    @Override
+    public void onBackspacePressed() {
+        // Se estamos mostrando un resultado final, o botón de retroceso non debe facer nada
+        if (resetingInput) {
+            return;
+        }
+
+        // O código que xa tiñas antes...
+        if (displayBuffer.length() > 0) {
+            displayBuffer.deleteCharAt(displayBuffer.length() - 1);
+            if (displayBuffer.length() == 0) {
+                view.clearDisplay();
+            } else {
+                view.setDisplay(displayBuffer.toString());
+            }
         }
     }
 }

@@ -40,7 +40,7 @@ public class SwingView implements View {
     private final JButton butAdd, butMinus, butMultiply, butDivide,
             butEqual, butCancel, butSqrt, butSquare, butInv, butCos, 
             butSin, butTan, butPower, butLog, butPercent, butAbs, butBin, 
-            butln, butNegate, butDecimal;
+            butln, butNegate, butDecimal, butBackspace;
 
     private final JButton butAcos, butAsin, butAtan;
 
@@ -115,6 +115,8 @@ public class SwingView implements View {
         butAcos = createButton("acos", ButtonType.FUNCTION);
         butAsin = createButton("asin", ButtonType.FUNCTION);
         butAtan = createButton("atan", ButtonType.FUNCTION);
+        butBackspace = createButton("<-", ButtonType.FUNCTION);
+        butDecimal = createButton(",", ButtonType.NUMBER);
 
         setupLayout();
     }
@@ -160,6 +162,7 @@ public class SwingView implements View {
         subPanels[3].add(butNums[9]);
         subPanels[3].add(Box.createHorizontalStrut(15));
         subPanels[3].add(butEqual);
+        subPanels[3].add(butBackspace); // Nuevo botón de eliminar
         subPanels[3].add(butCancel);
         mainPanel.add(subPanels[3]);
 
@@ -250,6 +253,7 @@ public class SwingView implements View {
         butAcos.addActionListener(e -> eventHandler.onUnaryOperatorPressed(ACOS));
         butAsin.addActionListener(e -> eventHandler.onUnaryOperatorPressed(ASIN));
         butAtan.addActionListener(e -> eventHandler.onUnaryOperatorPressed(ATAN));
+        butBackspace.addActionListener(e -> eventHandler.onBackspacePressed());
     }
 
     @Override
@@ -281,9 +285,11 @@ public class SwingView implements View {
         }
 
         // Eliminar punto final sen díxitos
-        if (textValue.endsWith(".")) {
+        if (textValue.endsWith(",")) {
             textValue = textValue.substring(0, textValue.length() - 1);
         }
+
+        textValue = textValue.replace(',', '.');  //Convertir coma en punto antes de parsear a double.
 
         try {
             return Double.parseDouble(textValue);
@@ -311,6 +317,7 @@ public class SwingView implements View {
 
     @Override
     public void setDisplay(String displayText) {
+        displayText = displayText.replace('.',','); // Cambiar punto por coma en el display.
         text.setText(displayText);
         startNewInput = true;
     }
