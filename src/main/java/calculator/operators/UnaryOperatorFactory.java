@@ -31,6 +31,9 @@ public class UnaryOperatorFactory {
             case ABS -> new AbsOperator();
             case BIN -> new BinOperator();
             case NEGATE -> new NegateOperator();
+            case ACOS -> new AcosOperator();
+            case ASIN -> new AsinOperator();
+            case ATAN -> new AtanOperator();
             default -> throw new IllegalArgumentException("Unknown operator mode: " + mode);
         };
     }

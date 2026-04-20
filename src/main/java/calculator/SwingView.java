@@ -47,6 +47,8 @@ public class SwingView implements View {
             butSin, butTan, butPower, butLog, butPercent, butAbs, butBin, 
             butln, butNegate, butDecimal, butBackspace;
 
+    private final JButton butAcos, butAsin, butAtan;
+
     private EventHandler eventHandler;
 
     private final Font numberFont = new Font("Segoe UI", Font.BOLD, 18);
@@ -72,8 +74,8 @@ public class SwingView implements View {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        subPanels = new JPanel[9];
-        for (int i = 0; i < 9; i++) {
+        subPanels = new JPanel[11];
+        for (int i = 0; i < 11; i++) {
             subPanels[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 3));
         }
 
@@ -114,6 +116,9 @@ public class SwingView implements View {
         butAbs = createButton("abs", ButtonType.FUNCTION);
         butBin = createButton("bin", ButtonType.FUNCTION);
         butNegate = createButton("+/-", ButtonType.NUMBER);
+        butAcos = createButton("acos", ButtonType.FUNCTION);
+        butAsin = createButton("asin", ButtonType.FUNCTION);
+        butAtan = createButton("atan", ButtonType.FUNCTION);
         butBackspace = createButton("<-", ButtonType.FUNCTION);
         butDecimal = createButton(",", ButtonType.NUMBER);
 
@@ -198,10 +203,16 @@ public class SwingView implements View {
         subPanels[8].add(butAbs);
         subPanels[8].add(butBin);
         mainPanel.add(subPanels[8]);
+
+        // --- Row 9 (Trigonometría inversa) ---
+        subPanels[9].add(butAcos);
+        subPanels[9].add(butAsin);
+        subPanels[9].add(butAtan);
+        mainPanel.add(subPanels[9]);
     }
 
     public void init() {
-        frame.setSize(550, 460); //Redimensión de la ventana
+        frame.setSize(465, 560);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -243,6 +254,10 @@ public class SwingView implements View {
         butDecimal.addActionListener(e -> eventHandler.onDecimalPressed());
         butEqual.addActionListener(e -> eventHandler.onEqualsPressed());
         butCancel.addActionListener(e -> eventHandler.onClearPressed());
+
+        butAcos.addActionListener(e -> eventHandler.onUnaryOperatorPressed(ACOS));
+        butAsin.addActionListener(e -> eventHandler.onUnaryOperatorPressed(ASIN));
+        butAtan.addActionListener(e -> eventHandler.onUnaryOperatorPressed(ATAN));
         butBackspace.addActionListener(e -> eventHandler.onBackspacePressed());
     }
 
